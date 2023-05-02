@@ -1,0 +1,264 @@
+/* -------------------------------------------------------------------------- */
+/*                                  variables                                 */
+/* -------------------------------------------------------------------------- */
+
+
+/* --------------------------------- colors --------------------------------- */
+$primary-color: #85c7ae;
+$dark-color: #0f5640;
+$very-dark-color: #01271b;
+$medium-color: #81a0ad;
+$light-color: #bae3dd;
+$off-white-color: #f7feff;
+$accent-color:#4545cf;
+
+
+/* ---------------------------------- fonts --------------------------------- */
+$body-font: "Raleway" , sans-serif;
+$hand-font: "Pacifico", cursive;
+
+
+
+/* -------------------------------------------------------------------------- */
+/*                                   mixins                                   */
+/* -------------------------------------------------------------------------- */
+
+@mixin hoverButton {
+    cursor: pointer;
+
+    background-color: $dark-color;
+    color:$light-color;
+
+    &:hover {
+        background-color: $accent-color;
+    }
+}
+
+@mixin flex {
+    display:flex;
+    vertical-align: middle;
+    margin:0px;
+
+
+    .narrow {
+        width:31%;
+        margin: 1%;
+    }
+
+    .wide {
+        width:65%;
+        margin:1%;
+    }
+
+    .half {
+        width:48%;
+        margin:1%;
+    }
+
+    .very-narrow {
+        width:18%;
+        margin: 1%;
+    }
+
+    .very-wide {
+        width:78%;
+        margin:1%;
+    }
+}
+
+
+
+/* -------------------------------------------------------------------------- */
+/*                                 responsive                                 */
+/* -------------------------------------------------------------------------- */
+
+
+/* --------------------------- desktop and tablet --------------------------- */
+@media screen and (min-width:480px) {
+    .responsive-flexy {
+        @include flex;
+    }
+}
+
+/* --------------------------------- mobile --------------------------------- */
+@media screen and (max-width:480px) {
+    .responsive-flexy {
+        * {
+            margin:2%;
+        }
+    }
+}
+
+
+
+/* -------------------------------------------------------------------------- */
+/*                                html defaults                               */
+/* -------------------------------------------------------------------------- */
+
+
+* {
+    transition:0.5s;
+}
+
+html {
+    background-color: $medium-color;
+    background-image: linear-gradient(#09092F99, #09092F99),
+    url("https://images.unsplash.com/photo-1682001426601-c7fdc9ea5b4e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80");
+    background-size: cover;
+    background-attachment: fixed;
+    background-blend-mode: subtract;
+}
+
+body {
+    max-width: 980px;
+    margin:auto;
+}
+
+/* ---------------------------------- text ---------------------------------- */
+h1 {
+    font-family:$hand-font;
+    font-weight:400;
+    font-size: 56px;
+    color:$very-dark-color;
+}
+
+h2 {
+    font-family: $body-font;
+    font-size: min(32px, 5vw);
+    font-weight:600;
+    text-transform: uppercase;
+    color: $very-dark-color;
+}
+
+h3 {
+    font-family: $body-font;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+h4 {
+    font-family:$body-font;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+p {
+    font-family: $body-font;
+    font-size: 14px;
+    font-weight:600;
+    line-height: 1.5em;
+}
+
+a {
+    color:inherit;
+    text-decoration:inherit;
+}
+
+
+
+/* -------------------------------------------------------------------------- */
+/*                      classes used throughout the page                      */
+/* -------------------------------------------------------------------------- */
+
+// links 
+.button {
+    @include hoverButton();
+    padding:2%;
+    border-radius:10px;
+    vertical-align: middle;
+    text-align: center;
+    margin:auto;
+    
+}
+
+.link {
+    text-decoration: underline;
+    color:$dark-color;
+
+    &:hover{
+        color:$accent-color;
+    }
+}
+
+// spaces and dividers 
+.space {
+    margin:50px;
+}
+
+.divider {
+    background-color: $dark-color;
+    margin:0px;
+    padding:2%;
+}
+
+.transparent-section {
+    background-color: #01271BAA;
+    z-index:-1;
+    padding:5%;
+}
+
+.flexy {
+    @include flex;
+    align-items: center;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+
+
+.light-bg {
+    background-color: $light-color;
+    padding:2%;
+}
+
+// icons
+.fa-solid {
+    color: $light-color;
+    font-size:2em;
+    cursor: pointer;
+    margin:auto;
+    padding:1%;
+
+    text-align: center;
+    vertical-align: middle;
+
+    &:hover {
+        color: $accent-color;
+    }
+
+    &.current {
+        color:$accent-color;
+    }
+}
+/* -------------------------------------------------------------------------- */
+/*                         classes and ids by section                         */
+/* -------------------------------------------------------------------------- */
+
+
+
+/* ----------------------------- gallery section ---------------------------- */
+
+// gallery
+.slide-image {
+    max-height: 80vh;
+    max-width: 100%;
+}
+
+.nav-div {
+    text-align: center;
+}
+
+.image-div {
+    width:90%;
+}
+
+.arrow-div {
+    width:5%;
+}
+
+
+
+
+
+
