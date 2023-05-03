@@ -59,6 +59,10 @@ export default class Slideshow {
         this.leftArrow = document.createElement("i");
         this.rightArrow = document.createElement("i");
 
+        // image src 
+        this.imageDOM.setAttribute("src", this.list[0]);
+
+
         // append DOM elements 
         this.mainDiv.append(this.slidesDiv, this.navDiv);
         this.slidesDiv.append(this.leftDiv, this.imageDiv, this.rightDiv);
@@ -68,14 +72,14 @@ export default class Slideshow {
 
 
         // DOM classes - divs
-        this.slidesDiv.classList.add("flexy");
+        this.slidesDiv.classList.add("flexy", "slides-div");
         this.imageDiv.classList.add("image-div");
         this.leftDiv.classList.add("arrow-div");
         this.rightDiv.classList.add("arrow-div");
         this.navDiv.classList.add("nav-div");
         // DOM classes - non-divs 
         this.imageDOM.classList.add("slide-image");
-        this.leftArrow.classList.add("fa-solid", "fa-chevron-left")
+        this.leftArrow.classList.add("fa-solid", "fa-chevron-left");
         this.rightArrow.classList.add("fa-solid", "fa-chevron-right");
         
         // arrow clicks
@@ -97,23 +101,78 @@ export default class Slideshow {
             this.navDots.push(dot);
             this.navDiv.appendChild(dot);            
         }
+
         // add click event to each dot 
         for (let i=0; i<this.length; i++) {
             const go = () => this.navigate(0,i);
             this.navDots[i].addEventListener("click", go);
         }
 
+        // highlight first dot 
+        this.navDots[0].classList.add("current");
 
-        this.navigate(0, 0);
+
 
     }
 
 
 
-    // changes the image
-    changeImage() {
-        this.imageDOM.setAttribute("src", this.list[this.index]);
-    }
+    imageAnimation(direction, newIndex) {
+
+        // create new image 
+        let newImage = document.createElement("img");
+        newImage.classList.add("slide-image");
+        newImage.setAttribute("src", this.list[newIndex]);
+        newImage.style.opacity = "0";
+
+
+        // new image starts from the right or left depending on direction 
+        if (direction == -1) {
+            newImage.style.transform = "translate(-50px)";
+        } else {
+            newImage.style.transform = "translate(50px)";
+        }
+        
+        
+        const replaceImage = () => {
+            this.imageDOM.remove();
+            this.imageDiv.appendChild(newImage);
+        }
+
+        // move new image to center
+        const moveNew = () => {
+            newImage.style.transition = "0.5s";
+            newImage.style.transform = "translateX(0px)";
+            newImage.style.opacity = "1";
+        }
+
+        setTimeout(replaceImage, 500);
+        setTimeout(moveNew, 550);
+        
+
+        // move old image to left/right and set opacity to 0 
+        this.imageDOM.style.opacity = "0";
+        if (direction == -1) {
+            this.imageDOM.style.transform = "translateX(50px)"
+        } else {
+            this.imageDOM.style.transform = "translateX(-50px)";
+        }
+
+
+        // assign imageDOM to newImage and remove newImage
+        const reset = () => {
+            this.imageDOM.removeAttribute("style");
+            this.imageDOM.classList.add("slide-image");
+            this.imageDOM.setAttribute("src", this.list[newIndex]);
+            newImage.remove();
+            this.imageDiv.append(this.imageDOM);
+        }
+
+        setTimeout(reset, 1000);
+        // newImage.remove()
+
+
+    } 
 
     // navigate to a different image --> then calls changeImage
     navigate(direction, goTo) {
@@ -150,7 +209,7 @@ export default class Slideshow {
             }
         }
 
-        this.changeImage();
+        this.imageAnimation(direction, this.index);
     }
 
    
